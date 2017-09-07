@@ -1,10 +1,10 @@
 # Data
-Information (data) forms a graph. Period. All attempts to hide this are going to cause issues. So any 'universal' data solution must embrace this graph nature.
+Information (data) forms a graph. Period. All attempts to hide this are going to cause issues. So any `universal` data solution must embrace this graph nature.
 
 ## Structure of the graph
 Any data structure or database you can dream of can be represented via entities and relations between these entities (Set Theoretic basis). 
 
-When I say graph I mean a directed, potentially cyclic graph of entities (nodes) and relations (links). Relations are of the form `some.namespace.for.relation/name` and for an entity `e` and a value `v`, we assert that `e` is related to `v` via the statement `e some.namespace.for.relation/name v`.
+When I say graph I mean a directed, potentially cyclic graph of entities (nodes) and relations (links). Relations are of the form `some.namespace.for.relation/rname` or simply `rname` and for an entity `e` and a value `v`, we assert that `e` is related to `v` via the statement `e some.namespace.for.relation/name v`.
 
 To convince you of this claim I've provided a few examples.
 
@@ -40,12 +40,14 @@ Note: A sorted list (represented as a linked list) is a special case of a tree.
 A (semi... kind of) formal definition is given below, but to set the stage, imagine two SQL tables 
 
 User:
+
 | id |  name  | address_id |
 |:--:|:------:|:----------:|
 | u1 | Alexis |     a1     |
 | u2 | Julien |     a1     |
 
 Address:
+
 | id |            home            |
 |:--:|:--------------------------:|
 | a1 | 4 Private Drive, Somewhere |
