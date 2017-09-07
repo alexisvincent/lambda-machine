@@ -1,5 +1,12 @@
 # Data
-Information (data) forms a graph. Period. All attempts to hide this are going to cause issues. So any `universal` data solution must embrace this graph nature.
+This document attempts to take a first principals approach to the topic of data in computer systems and provides opinionated ways to think about data systems.
+
+The main contentions are that:
+- complex data models are relational. i.e. a list of user_id's is a representation of a list of users
+- a query makes a demand for specific data in a specific form
+- to effectively construct this specific form, an expressive query language must understand/embrace the relation graph
+
+In other words, ***your data is a graph, deal with it!***.
 
 ## Structure of the graph
 Any data structure or database you can dream of can be represented via entities and relations between these entities (Set Theoretic basis). 
@@ -92,13 +99,26 @@ user/name  db/unique      false   # users can have the same name
 user/name  db/type        string  # a name is a string
 ```
 
-### Note
-This mapping from SQL databases to graph databases is (with standard schema) injective and homomorphic (some more consideration of all properties of SQL database semantics is required to make this claim). This suggests that there should also be an injective, homomorphic mapping from the SQL query language to a ***good*** graph query language. And conversely a mapping from a subset of the graph query language back to SQL. This is nice, since it means that any solution built for a graph database should be (with obvious limitations) automatically extendible to existing SQL databases.
+This mapping from SQL databases to graph databases is (with standard schema) injective and homomorphic (some more consideration of all properties of SQL database semantics is required to make this claim). This suggests that there should also be an injective, homomorphic mapping from the SQL query language to a **good** graph query language. And conversely a mapping from a subset of the graph query language back to SQL. This is nice, since it means that any solution built for a graph database should be (with obvious limitations) automatically extendible to existing SQL databases.
 
 ## Asking questions of data (i.e. queries)
-When we make a 'database' query, the purpose is to extract some immeadiately useful, specific information, derived from the data graph. This derived information is itself a graph, under the view that a)
+When we make a 'database' query, the purpose is to extract some immeadiately useful, specific information, derived from the data graph. Let's explore this a bit.
 
-Fundementally, a query is a function q: data graph -> data graph. 
-That is to say, it really is just a function on data. And so if we are being pedantic a powerful query language should actually be a fully featured programming language... The reason we call it a query Query is  (generally reduced). This 'question' is ***ALWAYS*** constraint/relational in nature.
+### Ex 1 - Chat Window
+Imagine we have a chat window between two parties. Upon load we want to display to the user the following *compound* information:
+- their name
+- name of person they're talking to
+- list of messages
 
-i.e. 
+What we would like to happen is for the data graph that contains this information to run through a transformation the gives us specifically the information above. Additionally we might have some UI component that expects to recieve the data in some structure, meaning the transformation should reduce the data graph to a specific form. This transformation then is then the underlying query.
+
+### Ex 2 - Analytics
+Imagine a music store owner wants to find out how many **Rolling Stones** albums have been sold in the past month. The answer in this case might simply be `7`.
+
+### Give me what I want, I don't care how you get it
+While these examples differ in terms of complexity, they share a purpose. In both cases we have an entity that needs some very specific information, in a very specific structure, which resides in some data graph. Neither cares (to some degree) the specific process taken to obtain or construct the information.
+
+The query is then simply a description of the data needs of the entity requesting it and the *easier* it is to describe this query the better.
+
+Under this conceptual understanding of a query, a query is nothing more then a function `q: data graph -> immeadiately usefull data graph`. And so our query language, whatever it may be, would ideally be able to precicely describe our data needs.
+
