@@ -22,17 +22,23 @@ For the list A:
 | 4 |
 
 We can represent this graph by constructing the relations `elementOf` and entities `A 1 2 3 4` and relating them as follows.
-`1 elementOf A`
-`2 elementOf A`
-`3 elementOf A`
-`4 elementOf A`
+```
+1 elementOf A
+2 elementOf A
+3 elementOf A
+4 elementOf A
+```
 
 ### Ex 3 - Tree and Sorted List
 For a simple family tree 2 levels deep with one grandparent we can construct the `childOf` relation and entities `grandfather father  daughter son`. And relate them:
 
-`son childOf father`
-`daughter childOf father`
-`father childOf grandfather`
+```
+son childOf father
+daughter childOf father
+father childOf grandfather
+```
+
+
 
 Note: A sorted list (represented as a linked list) is a special case of a tree.
 
@@ -53,25 +59,29 @@ Address:
 | a1 | 4 Private Drive, Somewhere |
 
 We can naively represent this graph as follows: we construct the relations `user/id user/name user/address_id` and entities `eu1 eu2 ea1` and relate them as follows.
-`eu1 user/id u1`
-`eu1 user/name "Alexis"`
-`eu1 user/address_id a1`
+```
+eu1 user/id u1
+eu1 user/name "Alexis"
+eu1 user/address_id a1
 
-`eu2 user/id u2`
-`eu2 user/name "Julien"`
-`eu2 user/address_id a1`
+eu2 user/id u2
+eu2 user/name "Julien"
+eu2 user/address_id a1
 
-`ea1 address/id a1`
-`ea1 address/home "4 Private Drive, Somewhere"`
+ea1 address/id a1
+ea1 address/home "4 Private Drive, Somewhere"
+```
 
 A better approch is to use the id's as the entity id, and to directly relate the user and address as follows: we construct the relations `user/id user/name user/address` (notice `user/address_id -> user/address`) and entities `u1 u2 a1` and relate them as follows.
-`u1 user/name "Alexis"`
-`u1 user/address a1`
+```
+u1 user/name "Alexis"
+u1 user/address a1
 
-`u2 user/name "Julien"`
-`u2 user/address a1`
+u2 user/name "Julien"
+u2 user/address a1
 
-`a1 address/home "4 Private Drive, Somewhere"`
+a1 address/home "4 Private Drive, Somewhere"
+```
 
 Below example isn't very well constructed, it started as a semi formal example, before I gave the above example.
 Given a set of tables `T = {a, b, c}` with columns `C = {x, y, z}` for each table, and rows `Rt = {t[r1], t[r2], t[r3]}` for every table t. Where `(t[ri], c)` is the value of the row i of the table t at some column c.
