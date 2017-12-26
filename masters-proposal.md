@@ -103,11 +103,13 @@ The same pattern matching system can be used to determine if a new database inse
 will invalidate the query, or any of the access control rules. This makes for simple implementation of realtime queries.
 
 ## Why this is cool
-- We can remove a lot of access control code from our code bases.
+- We can remove a lot of access control code from our code bases
 - Access to data is formally controlled by a system and safer due to decreased bug surface area
 - Operators can write complex access control rules without needing to write code
 - The query engine can optimize queries by heavily caching query fragments
 - Removes much of the N+1 problem
+- Application clients can express complex data requirements by directly writing database queries
+- A database client can be directly embedded in the application, abstracting away the hard distributed database problems
 
 ## Influences
 This work was heavily influenced by:
