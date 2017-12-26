@@ -4,9 +4,9 @@
 For some years now I've been frustrated with the speed of development and eventual quality of modern user facing software applications. In my experience, only 20% of the code produced is novel, domain specific and non-trivial. By leveraging simpler and more powerful abstractions, I believe there is still significant space for automation in this class of application.
 
 ## Overview
-Modern frontend applications have complex data requirements and should be able to convey these requirements preciely to the server. While we could directly expose the database query language to the client, this leaves our system open for unauthorized data access. Graph Filters aim to fix this problem by automatically augmenting database queries with the access control rules of the entity performing the query. This enables a large amount of potentially buggy, access control logic to be ommited, and the indirection between the database and the client to fall away.
+Modern frontend applications have complex data requirements and should be able to convey these requirements precisely to the server. While we could directly expose the database query language to the client, this leaves our system open for unauthorized data access. Graph Filters aim to fix this problem by automatically augmenting database queries with the access control rules of the entity performing the query. This enables a large amount of potentially buggy, access control logic to be omitted, and the indirection between the database and the client to fall away.
 
-Furthermore, Graph Filters provide a mechanism for preciely determining when database inserts should trigger query invalidations, significantly simplifying development of data efficient realtime clients.
+Furthermore, Graph Filters provide a mechanism for precisely determining when database inserts should trigger query invalidations, significantly simplifying development of data efficient realtime clients.
 
 ## Reach
 This project is motivated by the search for a practical solution to the described problem, as such, reach and feasibility of an implementation are primary concerns of the author. The techniques described in this paper, will focus on datalog as a query language, as provided by the Datomic database, but should be extendible to other graph databases, and even existing SQL installations.
@@ -93,7 +93,7 @@ which should then be optimized to simply
 ### Graph Filters
 A Graph Filter then, can be viewed as a filter applied over the original graph containing authorized data. More generally, a Graph Filter is a function `F: Graph -> Graph`, restricting access to certain facts, and the merge operation is the composition of filters, where queries are viewed as a special case of a filter.
 
-The goal of this research is to provide a well defined formal calculus for performing this merge operation not just for this simple case, but for full breadth the query language defined by Datomic's datalog.
+The goal of this research is to provide a well defined formal calculus for performing this merge operation not just for this simple case, but for the full breadth of the query language defined by Datomic's datalog.
 
 #### Realtime Queries
 The same pattern matching system can be used to determine if a new database insert such as
