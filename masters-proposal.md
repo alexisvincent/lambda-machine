@@ -91,7 +91,7 @@ which should then be optimized to simply
 ```
 
 ### Graph Filters
-A Graph Filter then, can be viewed as a filter applied over the original graph containing authorized data. More generally, a Graph Filter is a function F: Graph -> Graph, restricting access to certain facts, and the merge operation is the composition of filters, where queries are viewed as a special case of a filter.
+A Graph Filter then, can be viewed as a filter applied over the original graph containing authorized data. More generally, a Graph Filter is a function `F: Graph -> Graph`, restricting access to certain facts, and the merge operation is the composition of filters, where queries are viewed as a special case of a filter.
 
 The goal of this research is to provide a well defined formal calculus for performing this merge operation not just for this simple case, but for full breadth the query language defined by Datomic's datalog.
 
