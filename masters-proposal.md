@@ -93,6 +93,9 @@ which should then be optimized to simply
 ### Graph Filters
 A Graph Filter then, can be viewed as a filter applied over the original graph containing authorized data. More generally, a Graph Filter is a function `F: Graph -> Graph`, restricting access to certain facts, and the merge operation is the composition of filters, where queries are viewed as a special case of a filter.
 
+The goal of this research is to provide a well defined formal calculus for performing this merge operation not just for this simple case, but for full breadth the query language defined by Datomic's datalog.
+
+#### Realtime Queries
 The same pattern matching system can be used to determine if a new database insert such as
 ```clojure
 [:db/retract 3 :released false]
@@ -100,7 +103,8 @@ The same pattern matching system can be used to determine if a new database inse
 ```
 will invalidate the query, or any of the access control rules. This makes for simple implementation of realtime queries.
 
-The goal of this research is to provide a well defined formal calculus for performing this merge operation not just for this simple case, but for full breadth the query language defined by Datomic's datalog.
+#### Access Control on Writes
+Additionally, Graph Filters can also be used to validate writes. This is achieved by preemptively applying the write to a temporary write log and checking if new facts invalidate any access control rules. If so, the transaction is marked as invalid and rejected by the system.
 
 ## Why this is cool
 - We can remove a lot of access control code from our code bases
