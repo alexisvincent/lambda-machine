@@ -19,28 +19,28 @@ This paper presupposes basic understanding of
 - Replicated Immutable Log's
 
 ## Graphs and Graph Queries
-A Graph, is an ordered list/log of 4-tuples of the form (ASSERT | RETRACT, entity, attribute, value) called facts. Where ADD | RETRACT indicates whether the fact is being asserted or retracted. This structure is immutable, where modifications are simply additions to the log.
+A Graph, is an ordered list/log of 4-tuples of the form `(:db/assert | :db/retract , entity, attribute, value)` called facts. Where `:db/assert` | `:db/retract` indicates whether the fact is being asserted or retracted. This structure is immutable, where modifications are simply additions to the log.
 
-For example, the following facts would represent 3 products in the database:
+For example, the following facts would represent 3 products in the database
 
 ```clojure
-[:db/add, 1, :product/name, "iPhone 4"]
-[:db/add, 1, :product/manufacturer, "Apple"]
-[:db/add, 1, :product/sku, "SKU-23445"]
-[:db/add, 1, :product/sales, 5004]
-[:db/add, 1, :product/released, true]
+[:db/assert 1 :product/name "iPhone 4"]
+[:db/assert 1 :product/manufacturer "Apple"]
+[:db/assert 1 :product/sku "SKU-23445"]
+[:db/assert 1 :product/sales 5004]
+[:db/assert 1 :product/released true]
 
-[:db/add, 2, :product/name, "iPhone 5"]
-[:db/add, 2, :product/manufacturer, "Apple"]
-[:db/add, 2, :product/sku, "SKU-23443"]
-[:db/add, 2, :product/sales, 20100]
-[:db/add, 2, :product/released, true]
+[:db/assert 2 :product/name "iPhone 5"]
+[:db/assert 2 :product/manufacturer "Apple"]
+[:db/assert 2 :product/sku "SKU-23443"]
+[:db/assert 2 :product/sales 20100]
+[:db/assert 2 :product/released true]
 
-[:db/add, 3, :product/name, "iPhone 12"]
-[:db/add, 3, :product/manufacturer, "Apple"]
-[:db/add, 3, :product/sku, "SKU-23422"]
-[:db/add, 3, :product/sales, 0]
-[:db/add, 3, :product/released, false]
+[:db/assert 3 :product/name "iPhone 12"]
+[:db/assert 3 :product/manufacturer "Apple"]
+[:db/assert 3 :product/sku "SKU-23422"]
+[:db/assert 3 :product/sales 0]
+[:db/assert 3 :product/released false]
 ```
 
 A query for the name of all products manufactured by Apple with less then 10000 sales would look like this:
@@ -93,14 +93,14 @@ which should then be optimized to simply
 ### Graph Filters
 A Graph Filter then, can be viewed as a filter applied over the original graph containing authorized data. More generally, a Graph Filter is a function `F: Graph -> Graph`, restricting access to certain facts, and the merge operation is the composition of filters, where queries are viewed as a special case of a filter.
 
-The goal of this research is to provide a well defined formal calculus for performing this merge operation not just for this simple case, but for full breadth the query language defined by Datomic's datalog.
-
 The same pattern matching system can be used to determine if a new database insert such as
 ```clojure
 [:db/retract 3 :released false]
-[:db/assert 3 :released true]
+[:db/assert  3 :released true]
 ```
 will invalidate the query, or any of the access control rules. This makes for simple implementation of realtime queries.
+
+The goal of this research is to provide a well defined formal calculus for performing this merge operation not just for this simple case, but for full breadth the query language defined by Datomic's datalog.
 
 ## Why this is cool
 - We can remove a lot of access control code from our code bases
