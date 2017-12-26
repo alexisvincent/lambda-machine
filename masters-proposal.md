@@ -116,7 +116,7 @@ Additionally, Graph Filters can also be used to validate writes. This is achieve
 - A database client can be directly embedded in the application, abstracting away the hard distributed database problems
 
 ## Influences
-This work was heavily influenced by:
+This work is inspired by:
 - Nikita Prokopov - The Web after Tomorrow
 - Rich Hickey - The Value of Values; Datomic; Clojure; Hammock Driven Development
 - Tim Berners-Lee - The Semantic Web
