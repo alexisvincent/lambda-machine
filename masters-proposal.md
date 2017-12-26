@@ -1,7 +1,7 @@
 # Graph Filters
 
 ## Background
-For some years now I've been frustrated with the speed of development and eventual quality of modern user facing software applications. In my experience, only 20% of the code produced is novel, domain specific and non-trivial. By leveraging simpler and more powerful abstractions, I believe there is still significant space for automation in this class of application.
+For some years now I've been frustrated with the speed of development and eventual quality of modern user facing software applications. In my experience, only a small amount of the code produced is novel, domain specific and non-trivial. By leveraging simpler and more powerful abstractions, I believe there is still significant space for automation in this class of application.
 
 ## Overview
 Modern frontend applications have complex data requirements and should be able to convey these requirements precisely to the server. While we could directly expose the database query language to the client, this leaves our system open for unauthorized data access. Graph Filters aim to fix this problem by automatically augmenting database queries with the access control rules of the entity performing the query. This enables a large amount of potentially buggy, access control logic to be omitted, and the indirection between the database and the client to fall away.
